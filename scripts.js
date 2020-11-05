@@ -28,11 +28,14 @@ function paintToCanvas() {
     ctx.drawImage(video, 0, 0, width, height);
     //take the pixels out
     let pixels = ctx.getImageData(0, 0, width, height);
+
     //mess with them
     /*     pixels = redEffect(pixels); */
     /*     pixels = rgbSplit(pixels);
     ctx.globalAlpha = 0.8; */
     pixels = greenEffect(pixels);
+
+    
     //put them back
     ctx.putImageData(pixels, 0, 0);
   }, 16);
@@ -83,7 +86,8 @@ function greenEffect(pixels) {
     let blue = pixels.data[i + 2];
     let alpha = pixels.data[i + 3];
 
-    if (red >= levels.rmin &&
+    if (
+      red >= levels.rmin &&
       green >= levels.gmin &&
       blue >= levels.bmin &&
       red <= levels.rmax &&
